@@ -67,6 +67,7 @@ export default class ReactInstaStories extends Component {
           header={this.props.header}
           storyContentStyles={this.props.storyStyles}
           loop={this.props.loop}
+          lastStoryOverlay={this.props.lastStoryOverlay}
         />
       </div>
     )
@@ -83,7 +84,8 @@ ReactInstaStories.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
   loader: PropTypes.element,
-  header: PropTypes.element,
+  header: PropTypes.any,
   storyStyles: PropTypes.object,
-  loop: PropTypes.bool
+  loop: PropTypes.bool,
+  lastStoryOverlay: PropTypes.element
 }

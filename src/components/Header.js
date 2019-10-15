@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Header = ({ profileImage, heading, subheading }) =>
-  <div style={styles.main}>
+const Header = ({ profileImage, heading, subheading, className }) =>
+  <div style={styles.main} className={className}>
     {profileImage && <img style={styles.img} src={profileImage} />}
     <span style={styles.text}>
       <p style={styles.heading}>{heading}</p>

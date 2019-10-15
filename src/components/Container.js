@@ -10,7 +10,8 @@ class Container extends React.PureComponent {
       currentId: 0,
       pause: true,
       count: 0,
-      storiesDone: 0
+      storiesDone: 0,
+      done: false
     }
     this.defaultInterval = props.defaultInterval
     this.width = props.width
@@ -25,7 +26,8 @@ class Container extends React.PureComponent {
     if (this.state.currentId > 0) {
       this.setState({
         currentId: this.state.currentId - 1,
-        count: 0
+        count: 0,
+        done: false
       })
     }
   }
@@ -49,9 +51,18 @@ class Container extends React.PureComponent {
     if (this.state.currentId < this.props.stories.length - 1) {
       this.setState({
         currentId: this.state.currentId + 1,
-        count: 0
+        count: 0,
+        done: false
+      })
+    } else {
+      this.setState({
+        done: true
       })
     }
+  }
+
+  isLastStoryDone = () => {
+    return this.state.currentId >= this.props.stories.length - 1 && this.state.done
   }
 
   debouncePause = (e) => {
@@ -112,6 +123,7 @@ class Container extends React.PureComponent {
           <div style={{ width: '50%', zIndex: 999 }} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'previous')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'previous')} />
           <div style={{ width: '50%', zIndex: 999 }} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'next')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'next')} />
         </div>
+        {this.isLastStoryDone() ? this.props.lastStoryOverlay : null}
       </div>
     )
   }
@@ -142,9 +154,10 @@ Container.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
   loader: PropTypes.element,
-  header: PropTypes.element,
+  header: PropTypes.any,
   storyContentStyles: PropTypes.object,
-  loop: PropTypes.bool
+  loop: PropTypes.bool,
+  lastStoryOverlay: PropTypes.element
 }
 
 Container.defaultProps = {

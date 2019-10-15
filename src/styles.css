@@ -129,6 +129,12 @@ p{
   height: 100%;
   box-sizing: border-box;
   z-index: 99999;
+  transform: translateY(100%);
+  transition: transform 400ms ease-in-out 100ms;
+}
+
+.seeMoreVisible {
+  transform: translateY(0);
 }
 
 .seeMoreClose{
